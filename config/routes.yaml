@@ -1,3 +1,44 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+get_documents:
+    path: /documents
+    controller: App\Controller\FileController::getDocs
+    methods:    GET
+
+get_document:
+    path: /documents/{document_id}
+    controller: App\Controller\FileController::getDoc
+    methods:    GET
+
+create_document:
+    path: /documents
+    controller: App\Controller\FileController::createDoc
+    methods:    POST
+
+delete_document:
+    path: /documents/{document_id}
+    controller: App\Controller\FileController::deleteDoc
+    methods:    DELETE
+
+get_document_attachment:
+    path: /documents/{document_id}/attachment
+    controller: App\Controller\FileController::getDocAttachment
+    methods:    GET
+
+get_document_attachment_previews:
+    path: /documents/{document_id}/attachment/previews
+    controller: App\Controller\FileController::getDocAttachmentPreviews
+    methods:    GET
+
+get_document_attachment_preview:
+    path: /documents/{document_id}/attachment/previews/{preview_id}
+    controller: App\Controller\FileController::getDocAttachmentPreview
+    methods:    GET
+
+add_document_attachment_preview:
+    path: /documents/{document_id}/attachment
+    controller: App\Controller\FileController::addDocAttachmentPreview
+    methods:    POST
+
+delete_document_attachment_preview:
+    path: /documents/{document_id}/attachment/preview/{preview_id}
+    controller: App\Controller\FileController::deleteDocAttachmentPreview
+    methods:    DELETE
