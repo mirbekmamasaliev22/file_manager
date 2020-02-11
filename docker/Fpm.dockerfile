@@ -8,4 +8,7 @@ RUN useradd -ms /bin/bash admin \
     && pecl install imagick \
     && docker-php-ext-enable imagick \
     && usermod -aG www-data admin \
-    && usermod -aG admin www-data
+    && usermod -aG admin www-data \
+    && mkdir -p public/uploads/pdf \
+    && mkdir -p public/uploads/thumbnails \
+    && chmod 0777 -R public/uploads
