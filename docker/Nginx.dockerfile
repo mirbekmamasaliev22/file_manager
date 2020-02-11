@@ -1,2 +1,2 @@
 FROM nginx
-WORKDIR /var/www/file_manager
+WORKDIR /var/www/html

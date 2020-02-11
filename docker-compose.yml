@@ -10,7 +10,7 @@ services:
     ports:
       - "8088:80"
     volumes:
-      - ./:/var/www/file_manager
+      - ./:/var/www/html
       - ./docker/conf/default.conf:/etc/nginx/conf.d/default.conf
       - ./logs/nginx:/var/log/nginx
     links:
@@ -24,7 +24,7 @@ services:
     container_name: php_container
     restart: always
     volumes:
-      - ./:/var/www/file_manager
+      - ./:/var/www/html
     links:
       - mysql_service
 
@@ -48,6 +48,6 @@ services:
     container_name: composer_container
     restart: always
     volumes:
-      - ./:/var/www/file_manager
-    working_dir: /var/www/file_manager
+      - ./:/var/www/html
+    working_dir: /var/www/html
     command: composer install
