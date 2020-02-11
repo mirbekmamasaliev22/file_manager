@@ -44,14 +44,10 @@ services:
       - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
 
   composer_service:
-    build:
-      context: .
-      dockerfile: ./docker/Composer.dockerfile
+    image: composer:1.7
     container_name: composer_container
     restart: always
     volumes:
       - ./:/var/www/file_manager
-    links:
-      - php_service
     working_dir: /var/www/file_manager
     command: composer install
