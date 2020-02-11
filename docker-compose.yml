@@ -1,0 +1,55 @@
+version: "3.3"
+
+services:
+
+  nginx_service:
+    build:
+      context: .
+      dockerfile: ./docker/Nginx.dockerfile
+    container_name: nginx_container
+    ports:
+      - "8088:80"
+    volumes:
+      - ./:/var/www/file_manager
+      - ./docker/conf/default.conf:/etc/nginx/conf.d/default.conf
+    links:
+      - php_service
+      - mysql_service
+
+  php_service:
+    build:
+      context: .
+      dockerfile: ./docker/Fpm.dockerfile
+    container_name: php_container
+    restart: always
+    volumes:
+      - ./:/var/www/file_manager
+    links:
+      - mysql_service
+
+  mysql_service:
+    build:
+      context: .
+      dockerfile: ./docker/Mysql.dockerfile
+    container_name: mysql_container
+    restart: always
+    ports:
+      - "3380:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASS}
+      - MYSQL_DATABASE=${DB_NAME}
+    volumes:
+      - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
+
+  composer_service:
+    build:
+      context: .
+      dockerfile: ./docker/Composer.dockerfile
+    container_name: composer_container
+    restart: always
+    volumes:
+      - ./:/var/www/file_manager
+    links:
+      - php_service
+    working_dir: /var/www/file_manager
+    command: composer install
