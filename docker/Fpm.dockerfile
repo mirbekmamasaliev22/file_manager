@@ -1,4 +1,4 @@
-FROM php:5.6-fpm
+FROM php:7.3-fpm
 WORKDIR /var/www/file_manager
 RUN useradd -ms /bin/bash admin \
     && apt-get update \

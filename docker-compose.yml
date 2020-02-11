@@ -12,6 +12,7 @@ services:
     volumes:
       - ./:/var/www/file_manager
       - ./docker/conf/default.conf:/etc/nginx/conf.d/default.conf
+      - ./logs/nginx:/var/log/nginx
     links:
       - php_service
       - mysql_service
@@ -39,6 +40,7 @@ services:
       - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASS}
       - MYSQL_DATABASE=${DB_NAME}
     volumes:
+      - ./databases:/var/lib/mysql
       - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
 
   composer_service:

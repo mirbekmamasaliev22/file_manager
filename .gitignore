@@ -9,4 +9,6 @@
 .idea
 /var/
 /vendor/
+/databases/*
+/logs/nginx/*
 ###< symfony/framework-bundle ###
